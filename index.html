@@ -43,6 +43,158 @@ map.on('load', () => {
     }
   });
 });
+   map.addSource('1st-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/1st.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '1st-floor',
+  type: 'raster',
+  source: '1st-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+}); 
+   map.addSource('2nd-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/2nd.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '2nd-floor',
+  type: 'raster',
+  source: '2nd-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+    map.addSource('3rd-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/3rd.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '3rd-floor',
+  type: 'raster',
+  source: '3rd-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+    map.addSource('4th-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/4th.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '4th-floor',
+  type: 'raster',
+  source: '4th-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+    map.addSource('5th-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/5th.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '5th-floor',
+  type: 'raster',
+  source: '5th-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+   map.addSource('7th-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/7th.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '7th-floor',
+  type: 'raster',
+  source: '7th-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+   map.addSource('8th-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/8th.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '8th-floor',
+  type: 'raster',
+  source: '8th-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
+    map.addSource('9th-floor', {
+  type: 'image',
+  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/9th.png',
+  coordinates: [
+    [-93.2769, 37.1535],
+    [-93.2755, 37.1535],
+    [-93.2755, 37.1523],
+    [-93.2769, 37.1523]
+  ]
+});
+
+map.addLayer({
+  id: '9th-floor',
+  type: 'raster',
+  source: '9th-floor',
+  paint: {
+    'raster-opacity': 0.8
+  }
+});
     const marker = new mapboxgl.Marker()
       .setLngLat([-93.2923, 37.1206])
       .setPopup(new mapboxgl.Popup().setHTML("<h3>Emergency Dept</h3><p>Entrance A</p>"))
