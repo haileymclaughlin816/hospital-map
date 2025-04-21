@@ -37,44 +37,67 @@
 </select>
   <div id='map'></div>
   <script>
-    const floors = [
-  { id: 'ground-floor', file: 'ground.png' },
-  { id: '1st-floor', file: '1st.png' },
-  { id: '2nd-floor', file: '2nd.png' },
-  { id: '3rd-floor', file: '3rd.png' },
-  { id: '4th-floor', file: '4th.png' },
-  { id: '5th-floor', file: '5th.png' },
-  { id: '7th-floor', file: '7th.png' },
-  { id: '8th-floor', file: '8th.png' },
-  { id: '9th-floor', file: '9th.png' }
-];
+  <script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiaGFpbGV5bWNsYXVnaGxpbjgxNiIsImEiOiJjbThjNzFlNmYwOXhpMmpvbGxqYm02ZjFvIn0.aYKi3cWby6LrDWTnCPNcIA';
 
-map.on('load', () => {
-  floors.forEach(floor => {
-    map.addSource(floor.id, {
-      type: 'image',
-      url: `https://github.com/haileymclaughlin816/hospital-map/raw/main/${floor.file}`,
-      coordinates: [
-        [-93.2769, 37.1535],
-        [-93.2755, 37.1535],
-        [-93.2755, 37.1523],
-        [-93.2769, 37.1523]
-      ]
-    });
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/haileymclaughlin816/cm9r4b1os001m01qtcnn52j50',
+    center: [-93.2923, 37.1206],
+    zoom: 17
+  });
 
-    map.addLayer({
-      id: floor.id,
-      type: 'raster',
-      source: floor.id,
-      paint: {
-        'raster-opacity': 0.8
-      },
-      layout: {
-        visibility: floor.id === 'ground-floor' ? 'visible' : 'none'
-      }
+  const marker = new mapboxgl.Marker()
+    .setLngLat([-93.2923, 37.1206])
+    .setPopup(new mapboxgl.Popup().setHTML("<h3>Emergency Dept</h3><p>Entrance A</p>"))
+    .addTo(map);
+
+  const floors = [
+    { id: 'ground-floor', file: 'ground.png' },
+    { id: '1st-floor', file: '1st.png' },
+    { id: '2nd-floor', file: '2nd.png' },
+    { id: '3rd-floor', file: '3rd.png' },
+    { id: '4th-floor', file: '4th.png' },
+    { id: '5th-floor', file: '5th.png' },
+    { id: '7th-floor', file: '7th.png' },
+    { id: '8th-floor', file: '8th.png' },
+    { id: '9th-floor', file: '9th.png' }
+  ];
+
+  map.on('load', () => {
+    floors.forEach(floor => {
+      map.addSource(floor.id, {
+        type: 'image',
+        url: `https://github.com/haileymclaughlin816/hospital-map/raw/main/${floor.file}`,
+        coordinates: [
+          [-93.2769, 37.1535],
+          [-93.2755, 37.1535],
+          [-93.2755, 37.1523],
+          [-93.2769, 37.1523]
+        ]
+      });
+
+      map.addLayer({
+        id: floor.id,
+        type: 'raster',
+        source: floor.id,
+        paint: {
+          'raster-opacity': 0.8
+        },
+        layout: {
+          visibility: floor.id === 'ground-floor' ? 'visible' : 'none'
+        }
+      });
     });
   });
-});
+
+  document.getElementById('floorSelector').addEventListener('change', function(e) {
+    const selected = e.target.value;
+    floors.forEach(floor => {
+      map.setLayoutProperty(floor.id, 'visibility', floor.id === selected ? 'visible' : 'none');
+    });
+  });
+</script>
 
 // Dropdown logic
 document.getElementById('floorSelector').addEventListener('change', function(e) {
