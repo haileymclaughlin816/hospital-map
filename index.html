@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Mapbox CSS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+  #floorSelector {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    padding: 8px;
+    font-size: 16px;
+  }
+</style>
   <meta charset="utf-8" />
   <title>Hospital Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,8 +24,65 @@
   </style>
 </head>
 <body>
+  <select id="floorSelector">
+  <option value="ground-floor">Ground Floor</option>
+  <option value="1st-floor">1st Floor</option>
+  <option value="2nd-floor">2nd Floor</option>
+  <option value="3rd-floor">3rd Floor</option>
+  <option value="4th-floor">4th Floor</option>
+  <option value="5th-floor">5th Floor</option>
+  <option value="7th-floor">7th Floor</option>
+  <option value="8th-floor">8th Floor</option>
+  <option value="9th-floor">9th Floor</option>
+</select>
   <div id='map'></div>
   <script>
+    const floors = [
+  { id: 'ground-floor', file: 'ground.png' },
+  { id: '1st-floor', file: '1st.png' },
+  { id: '2nd-floor', file: '2nd.png' },
+  { id: '3rd-floor', file: '3rd.png' },
+  { id: '4th-floor', file: '4th.png' },
+  { id: '5th-floor', file: '5th.png' },
+  { id: '7th-floor', file: '7th.png' },
+  { id: '8th-floor', file: '8th.png' },
+  { id: '9th-floor', file: '9th.png' }
+];
+
+map.on('load', () => {
+  floors.forEach(floor => {
+    map.addSource(floor.id, {
+      type: 'image',
+      url: `https://github.com/haileymclaughlin816/hospital-map/raw/main/${floor.file}`,
+      coordinates: [
+        [-93.2769, 37.1535],
+        [-93.2755, 37.1535],
+        [-93.2755, 37.1523],
+        [-93.2769, 37.1523]
+      ]
+    });
+
+    map.addLayer({
+      id: floor.id,
+      type: 'raster',
+      source: floor.id,
+      paint: {
+        'raster-opacity': 0.8
+      },
+      layout: {
+        visibility: floor.id === 'ground-floor' ? 'visible' : 'none'
+      }
+    });
+  });
+});
+
+// Dropdown logic
+document.getElementById('floorSelector').addEventListener('change', function(e) {
+  const selected = e.target.value;
+  floors.forEach(floor => {
+    map.setLayoutProperty(floor.id, 'visibility', floor.id === selected ? 'visible' : 'none');
+  });
+});
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGFpbGV5bWNsYXVnaGxpbjgxNiIsImEiOiJjbThjNzFlNmYwOXhpMmpvbGxqYm02ZjFvIn0.aYKi3cWby6LrDWTnCPNcIA';
 
     const map = new mapboxgl.Map({
@@ -22,179 +91,6 @@
       center: [-93.2923, 37.1206],
       zoom: 17
     });
-map.on('load', () => {
-  map.addSource('ground-floor', {
-    type: 'image',
-    url: 'https://haileymclaughlin816.github.io/hospital-map/ground.png',
-    coordinates: [
-      [-93.2932, 37.1211],
-      [-93.2914, 37.1211],
-      [-93.2914, 37.1201],
-      [-93.2932, 37.1201]
-    ]
-  });
-
-  map.addLayer({
-    id: 'ground-floor',
-    type: 'raster',
-    source: 'ground-floor',
-    paint: {
-      'raster-opacity': 0.8
-    }
-  });
-});
-   map.addSource('1st-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/1st.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '1st-floor',
-  type: 'raster',
-  source: '1st-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-}); 
-   map.addSource('2nd-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/2nd.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '2nd-floor',
-  type: 'raster',
-  source: '2nd-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-    map.addSource('3rd-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/3rd.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '3rd-floor',
-  type: 'raster',
-  source: '3rd-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-    map.addSource('4th-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/4th.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '4th-floor',
-  type: 'raster',
-  source: '4th-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-    map.addSource('5th-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/5th.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '5th-floor',
-  type: 'raster',
-  source: '5th-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-   map.addSource('7th-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/7th.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '7th-floor',
-  type: 'raster',
-  source: '7th-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-   map.addSource('8th-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/8th.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '8th-floor',
-  type: 'raster',
-  source: '8th-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
-    map.addSource('9th-floor', {
-  type: 'image',
-  url: 'https://github.com/haileymclaughlin816/hospital-map/raw/main/9th.png',
-  coordinates: [
-    [-93.2769, 37.1535],
-    [-93.2755, 37.1535],
-    [-93.2755, 37.1523],
-    [-93.2769, 37.1523]
-  ]
-});
-
-map.addLayer({
-  id: '9th-floor',
-  type: 'raster',
-  source: '9th-floor',
-  paint: {
-    'raster-opacity': 0.8
-  }
-});
     const marker = new mapboxgl.Marker()
       .setLngLat([-93.2923, 37.1206])
       .setPopup(new mapboxgl.Popup().setHTML("<h3>Emergency Dept</h3><p>Entrance A</p>"))
