@@ -22,7 +22,27 @@
       center: [-93.2923, 37.1206],
       zoom: 17
     });
+map.on('load', () => {
+  map.addSource('ground-floor', {
+    type: 'image',
+    url: 'https://haileymclaughlin816.github.io/hospital-map/ground.png',
+    coordinates: [
+      [-93.2932, 37.1211],
+      [-93.2914, 37.1211],
+      [-93.2914, 37.1201],
+      [-93.2932, 37.1201]
+    ]
+  });
 
+  map.addLayer({
+    id: 'ground-floor',
+    type: 'raster',
+    source: 'ground-floor',
+    paint: {
+      'raster-opacity': 0.8
+    }
+  });
+});
     const marker = new mapboxgl.Marker()
       .setLngLat([-93.2923, 37.1206])
       .setPopup(new mapboxgl.Popup().setHTML("<h3>Emergency Dept</h3><p>Entrance A</p>"))
