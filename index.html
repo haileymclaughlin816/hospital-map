@@ -22,15 +22,15 @@
 </head>
 <body>
   <select id="floorSelector">
-    <option value="ground-floor">Ground Floor</option>
-    <option value="1st-floor">1st Floor</option>
-    <option value="2nd-floor">2nd Floor</option>
-    <option value="3rd-floor">3rd Floor</option>
-    <option value="4th-floor">4th Floor</option>
-    <option value="5th-floor">5th Floor</option>
-    <option value="7th-floor">7th Floor</option>
-    <option value="8th-floor">8th Floor</option>
-    <option value="9th-floor">9th Floor</option>
+    <option value="ground.floor">Ground Floor</option>
+    <option value="1st.floor">1st Floor</option>
+    <option value="2nd.floor">2nd Floor</option>
+    <option value="3rd.floor">3rd Floor</option>
+    <option value="4th.floor">4th Floor</option>
+    <option value="5th.floor">5th Floor</option>
+    <option value="7th.floor">7th Floor</option>
+    <option value="8th.floor">8th Floor</option>
+    <option value="9th.floor">9th Floor</option>
   </select>
   <div id="map"></div>
  <script>
@@ -49,15 +49,15 @@
       .addTo(map);
 
     const floors = [
-      { id: 'ground-floor', file: 'ground.png' },
-      { id: '1st-floor', file: '1st.png' },
-      { id: '2nd-floor', file: '2nd.png' },
-      { id: '3rd-floor', file: '3rd.png' },
-      { id: '4th-floor', file: '4th.png' },
-      { id: '5th-floor', file: '5th.png' },
-      { id: '7th-floor', file: '7th.png' },
-      { id: '8th-floor', file: '8th.png' },
-      { id: '9th-floor', file: '9th.png' }
+      { id: 'ground.floor', file: 'ground.png' },
+      { id: '1st.floor', file: '1st.png' },
+      { id: '2nd.floor', file: '2nd.png' },
+      { id: '3rd.floor', file: '3rd.png' },
+      { id: '4th.floor', file: '4th.png' },
+      { id: '5th.floor', file: '5th.png' },
+      { id: '7th.floor', file: '7th.png' },
+      { id: '8th.floor', file: '8th.png' },
+      { id: '9th.floor', file: '9th.png' }
     ];
 
     map.on('load', () => {
@@ -81,7 +81,7 @@
             'raster-opacity': 0.8
           },
           layout: {
-            visibility: floor.id === 'ground-floor' ? 'visible' : 'none'
+            visibility: floor.id === 'ground.floor' ? 'visible' : 'none'
           }
         });
       });
