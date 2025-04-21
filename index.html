@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <title>Hospital Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
   <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
     #floorSelector {
       position: absolute;
       top: 10px;
@@ -12,28 +18,28 @@
       padding: 8px;
       font-size: 16px;
     }
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
   </style>
-  <meta charset="utf-8" />
-  <title>Hospital Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+  <!-- Mapbox JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 </head>
 <body>
+
   <select id="floorSelector">
-    <option value="ground.floor">Ground Floor</option>
-    <option value="1st.floor">1st Floor</option>
-    <option value="2nd.floor">2nd Floor</option>
-    <option value="3rd.floor">3rd Floor</option>
-    <option value="4th.floor">4th Floor</option>
-    <option value="5th.floor">5th Floor</option>
-    <option value="7th.floor">7th Floor</option>
-    <option value="8th.floor">8th Floor</option>
-    <option value="9th.floor">9th Floor</option>
+    <option value="ground-floor">Ground Floor</option>
+    <option value="1st-floor">1st Floor</option>
+    <option value="2nd-floor">2nd Floor</option>
+    <option value="3rd-floor">3rd Floor</option>
+    <option value="4th-floor">4th Floor</option>
+    <option value="5th-floor">5th Floor</option>
+    <option value="7th-floor">7th Floor</option>
+    <option value="8th-floor">8th Floor</option>
+    <option value="9th-floor">9th Floor</option>
   </select>
+
   <div id="map"></div>
- <script>
+
+  <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGFpbGV5bWNsYXVnaGxpbjgxNiIsImEiOiJjbThjNzFlNmYwOXhpMmpvbGxqYm02ZjFvIn0.aYKi3cWby6LrDWTnCPNcIA';
 
     const map = new mapboxgl.Map({
@@ -49,15 +55,15 @@
       .addTo(map);
 
     const floors = [
-      { id: 'ground.floor', file: 'ground.png' },
-      { id: '1st.floor', file: '1st.png' },
-      { id: '2nd.floor', file: '2nd.png' },
-      { id: '3rd.floor', file: '3rd.png' },
-      { id: '4th.floor', file: '4th.png' },
-      { id: '5th.floor', file: '5th.png' },
-      { id: '7th.floor', file: '7th.png' },
-      { id: '8th.floor', file: '8th.png' },
-      { id: '9th.floor', file: '9th.png' }
+      { id: 'ground-floor', file: 'ground.png' },
+      { id: '1st-floor', file: '1st.png' },
+      { id: '2nd-floor', file: '2nd.png' },
+      { id: '3rd-floor', file: '3rd.png' },
+      { id: '4th-floor', file: '4th.png' },
+      { id: '5th-floor', file: '5th.png' },
+      { id: '7th-floor', file: '7th.png' },
+      { id: '8th-floor', file: '8th.png' },
+      { id: '9th-floor', file: '9th.png' }
     ];
 
     map.on('load', () => {
@@ -81,13 +87,12 @@
             'raster-opacity': 0.8
           },
           layout: {
-            visibility: floor.id === 'ground.floor' ? 'visible' : 'none'
+            visibility: floor.id === 'ground-floor' ? 'visible' : 'none'
           }
         });
       });
     });
 
-    // Dropdown logic
     document.getElementById('floorSelector').addEventListener('change', function(e) {
       const selected = e.target.value;
       floors.forEach(floor => {
